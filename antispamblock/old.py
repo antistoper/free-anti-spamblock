@@ -15,7 +15,7 @@ import aiosmtplib
 import termcolor
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
-with open("./scripts/sets/emails.json") as emails_file:
+with open("sets/emails.json") as emails_file:
     senders = json.load(emails_file)
 
 receivers = ['abuse@telegram.org', 'support@telegram.org']
@@ -59,7 +59,6 @@ async def send_request(sent_emails):
         text = termcolor.colored(f"Запрос №{sent_emails + 1} отправлен на {receiver} от {sender_email}!", "blue")
         print(text)
     except Exception as exc:
-        print(exc)
         bad += 1
         text = termcolor.colored(f"Запрос №{sent_emails + 1} от {sender_email} не был отправлен", "red")
         print(text)
